@@ -1,0 +1,11 @@
+A=$('*').innerText.match(/(\s*\[(.+)])/g).map(r=>r.replace(/\s{4}/g,'-').replace(/[^A-Z-]/g,'').split(''))
+a=A
+if(a.length<a[0].length)a.unshift([...Array(a[0].length)].map(x=>'-'))
+S=a.map((v,c)=>A.map(r=>r[c])).map(r=>r.filter(v=>v[0]!='-'))
+S.unshift(0)
+$('*').innerText.match(/m.*/g).map(i=>i.match(/\d+/g)).forEach(i=>{
+S[i[2]].splice(0,0,...S[i[1]].slice(0,i[0]))
+S[i[1]].splice(0,i[0])
+})
+S.shift()
+S.reduce((a,b)=>a+b.shift())
